@@ -11,7 +11,7 @@ using WebApiTest.Persistence.Repository.Eventos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using WebApiTest.Application.Features.Adjunto.Interfaces;
 
 namespace WebApiTest.Persistence;
 public static class ServiceExtensions
@@ -33,19 +33,9 @@ public static class ServiceExtensions
         #region Repositories
 
         services.AddTransient(typeof(IRepositoryAsync<>), typeof(CustomRepositoryAsync<>));
-
-        //services.AddTransient(typeof(IRepositoryAsync<>), typeof(CustomRepositoryAsync<>));
-
-        //services.AddTransient<IEventos, EventosService>();
-        /*
-        services.AddTransient<IOtpService, OtpService>();
-        services.AddTransient<ILdapUserService, LdapUserService>();
-        services.AddTransient<IApisConsumoAsync, ApisConsumoAsync>();
-        */
-
         services.AddTransient<IAcontecimientos, AcontecimientoService>();
         services.AddTransient<IClientes, ClientesService>();
-        //services.AddTransient<IAcontecimientos, AcontecimientoService>();
+        services.AddTransient<IAdjuntoService, AdjuntoService>();
         #endregion
 
         return services;

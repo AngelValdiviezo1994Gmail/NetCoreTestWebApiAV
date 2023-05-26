@@ -48,13 +48,13 @@ public class Adjuntos
     public string UsuarioCreacion { get; set; } = string.Empty;
 
     [Column("fechaCreacion", Order = 9, TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; } = System.DateTime.Now;
+    public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
     [Column("usuarioModificacion", Order = 10, TypeName = "varchar")]
     public string UsuarioModificacion { get; set; } = string.Empty;
 
     [Column("fechaModificacion", Order = 11, TypeName = "datetime")]
-    public Nullable<System.DateTime> FechaModificacion { get; set; }
+    public Nullable<DateTime> FechaModificacion { get; set; }
 
 }
 

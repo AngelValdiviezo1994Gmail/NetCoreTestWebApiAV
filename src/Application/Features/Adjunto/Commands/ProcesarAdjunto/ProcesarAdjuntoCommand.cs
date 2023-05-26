@@ -50,8 +50,8 @@ public class ProcesarAdjuntoCommandHandler : IRequestHandler<ProcesarAdjuntoComm
     {
         try
         {
-            var entity = _mapper.Map<Adjuntos>(objCommand.request);
-            var objresult = await _repositoryAsync.ProcesarAdjunto(entity, cancellationToken);
+            //var entity = _mapper.Map<Adjuntos>(objCommand.request);
+            var objresult = await _repositoryAsync.ProcesarAdjunto(objCommand.request, cancellationToken);
             return objresult;
         }
         catch (Exception ex)

@@ -30,6 +30,7 @@ using System.Text.Json;
 using WebApiTest.Application.Common.Exceptions;
 using WebApiTest.Application.Common.Interfaces;
 using WebApiTest.Application.Common.Wrappers;
+using WebApiTest.Application.Features.Adjunto.Commands.ProcesarAdjunto;
 using WebApiTest.Application.Features.Adjunto.Dto;
 using WebApiTest.Application.Features.Adjunto.Interfaces;
 using WebApiTest.Application.Features.Adjunto.Specifications;
@@ -40,22 +41,39 @@ namespace WebApiTest.Persistence.Repository
     public class AdjuntoService : IAdjuntoService
     {
         private const string _User = "admin";
-        private readonly IConfiguration _config;
+        
+        
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
         private readonly ILogger<Adjuntos> _log;
         private readonly IRepositoryAsync<Adjuntos> _repoAjuntoAsync;
 
         public AdjuntoService(IConfiguration config, IRepositoryAsync<Adjuntos> repository, IMapper mapper, ILogger<Adjuntos> log)
         {
             _repoAjuntoAsync = repository;
+            
             _mapper = mapper;
             _config = config;
             _log = log;
+            
         }
+
+        /*
+         
+        private readonly IRepositoryAsync<AcontecimientosModels> _repositoryAcontecimientoAsync;
+
+        public AcontecimientoService(IRepositoryAsync<AcontecimientosModels> repositoryAcontecimientoAsync)
+        {
+            _repositoryAcontecimientoAsync = repositoryAcontecimientoAsync;
+        }
+         
+         */
 
 
         #region ProcesarAdjunto
-        public async Task<ResponseType<string>> ProcesarAdjunto(Adjuntos request, CancellationToken cancellationToken)
+        //ProcesarAdjuntoRequest
+        //public async Task<ResponseType<string>> ProcesarAdjunto(Adjuntos request, CancellationToken cancellationToken)
+        public async Task<ResponseType<string>> ProcesarAdjunto(ProcesarAdjuntoRequest request, CancellationToken cancellationToken)
         {
             try
             {
@@ -72,7 +90,8 @@ namespace WebApiTest.Persistence.Repository
 
                 var tmpruta = string.Concat(rutaAdjuntoBase, rutaComplemento);
                 var tmpfinal = string.Concat(rutaAdjuntoBase, rutaComplemento, nombreArchivo, extensionArchivo);
-                var objClient = _mapper.Map<Adjuntos>(request);
+                //var objClient = _mapper.Map<Adjuntos>(request);
+                Adjuntos objClient = new Adjuntos();
 
                 string rutaPath = Path.Combine(tmpruta);
                 string finalPath = Path.Combine(tmpfinal);
@@ -97,6 +116,8 @@ namespace WebApiTest.Persistence.Repository
                 objClient.IdTipoSolicitud = request.IdTipoSolicitud ?? string.Empty;
                 objClient.IdFeature = request.IdFeature ?? string.Empty;
                 objClient.Estado = "A";
+
+                //var objResultado = await _repositoryAcontecimientoAsync.AddAsync(objAcont, cancellationToken);
 
                 var insAdjunto = await _repoAjuntoAsync.AddAsync(objClient, cancellationToken);
 

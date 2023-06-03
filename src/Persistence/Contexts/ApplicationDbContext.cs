@@ -5,6 +5,8 @@ using WebApiTest.Domain.Entities.Acontecimientos;
 using WebApiTest.Domain.Entities.Clientes;
 using WebApiTest.Domain.Entities.Eventos;
 using Microsoft.EntityFrameworkCore;
+using WebApiTest.Domain.Entities;
+
 namespace WebApiTest.Persistence.Contexts;
 
 public class ApplicationDbContext : DbContext
@@ -19,6 +21,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<tblEventoNextTi> eventosModels => Set<tblEventoNextTi>();
     public DbSet<AcontecimientosModels> acontecimientosModels => Set<AcontecimientosModels>();
     public DbSet<ClientesModels> clientesModels => Set<ClientesModels>();
+    public DbSet<Adjuntos> adjuntosModels => Set<Adjuntos>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

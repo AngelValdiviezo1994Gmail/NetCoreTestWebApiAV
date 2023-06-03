@@ -26,7 +26,7 @@ public class AdjuntoByIdentifiacionAndFeatureSpec : Specification<Adjuntos>
     public AdjuntoByIdentifiacionAndFeatureSpec(string Identificacion, string IdFeature, string idSolicitud)
     {
         if (string.IsNullOrEmpty(idSolicitud))
-            Query.Where(p => p.Identificacion == Identificacion && p.IdFeature == IdFeature && p.Estado == "A").OrderByDescending(x => x.FechaCreacion);
+            Query.Where(p => p.Identificacion == Identificacion && p.IdFeature == IdFeature && p.Estado == "A").OrderByDescending(x => x.FechaCreacion).Include( x => x.objFeatures);//trae relacionado el feature, ejemplo se consultan todos los archivos adjuntos que pertenezcan a un rango de fecha filtrando por el feature
         else
             Query.Where(p => p.Identificacion == Identificacion && p.IdFeature == IdFeature && p.IdSolicitud == idSolicitud && p.Estado == "A").OrderByDescending(x => x.FechaCreacion);
     }

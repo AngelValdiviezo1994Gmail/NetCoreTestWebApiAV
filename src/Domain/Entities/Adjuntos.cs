@@ -19,6 +19,8 @@ public class Adjuntos
     [Column("idFeature", Order = 2, TypeName = "varchar")]
     public string IdFeature { get; set; } = string.Empty;
 
+    public virtual Features objFeatures { get; set; }
+
     [Column("idSolicitud", Order = 3, TypeName = "varchar")]
     public string IdSolicitud { get; set; } = string.Empty;
 
